@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-option go_package = "genproto/auth";
+option go_package = "genproto/user";
 
-package auth;
+package user;
 
 service UserService{
     rpc GetProfile(Id) returns (User);
     rpc UpdateProfile(ReqUpdateUser) returns (User);
-    rpc ResetPassword(ReqResetPassword) returns (Status);
+    rpc UpdatePassword(ReqUpdatePassword) returns (Status);
     rpc DeleteUser(Id) returns (Status);
 }
 
@@ -19,11 +19,10 @@ message User {
     string id = 1;
     string username  = 2;
     string email = 3;
-    string password = 5;
-    string full_name = 6;
-    string user_type = 7;
-    string created_at = 8;
-    string updated_at = 9;
+    string full_name = 4;
+    string user_type = 5;
+    string created_at = 6;
+    string updated_at = 7;
 }
 
 message ReqUpdateUser{
@@ -32,10 +31,11 @@ message ReqUpdateUser{
     string phone_number = 3;
 }
 
-message ReqResetPassword{
-    string email = 1;
-}
-
 message Status{
     string message = 1; 
+}
+
+message ReqUpdatePassword {
+    string email = 1;
+    string password = 2;
 }

@@ -7,8 +7,9 @@ package auth;
 service Auth {
     rpc Register(ReqCreateUser) returns (User);
     rpc Login(ReqLogin) returns (Tokens);
-    rpc Logout(ReqLogin) returns (Tokens);
-    rpc RefreshToken(ReqRefresh) returns (Tokens);
+    rpc Logout(Token) returns (Void);
+    rpc RefreshToken(Token) returns (Tokens);
+    rpc ResetPassword(ReqResetPassword) returns (Status);
 
 }
 
@@ -24,11 +25,10 @@ message User {
     string id = 1;
     string username  = 2;
     string email = 3;
-    string password = 5;
-    string full_name = 6;
-    string user_type = 7;
-    string created_at = 8;
-    string updated_at = 9;
+    string full_name = 4;
+    string user_type = 5;
+    string created_at = 6;
+    string updated_at = 7;
 }
 
 message ReqLogin{
@@ -42,6 +42,26 @@ message Tokens {
     int64 expires_in = 3;
 }
 
-message ReqRefresh{
+message Token{
     string refresh_token = 1;
+}
+
+message UserClaims {
+    string id = 1;
+    string username  = 2;
+    string email = 3;
+    string full_name = 4;
+    string user_type = 5;
+}
+
+message Void{
+
+}
+
+message ReqResetPassword{
+    string email = 1;
+}
+
+message Status{
+    string message = 1; 
 }
