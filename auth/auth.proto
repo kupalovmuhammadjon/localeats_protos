@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "genproto/auth";
+
+package auth;
+
+service Auth {
+    rpc Register(ReqCreateUser) returns (User);
+    rpc Login(ReqLogin) returns (Tokens);
+    rpc Logout(ReqLogin) returns (Tokens);
+    rpc RefreshToken(ReqRefresh) returns (Tokens);
+
+}
+
+message ReqCreateUser{
+    string username  = 1;
+    string email = 2;
+    string password = 3;
+    string full_name = 4;
+    string user_type = 5;
+}
+
+message User {
+    string id = 1;
+    string username  = 2;
+    string email = 3;
+    string password = 5;
+    string full_name = 6;
+    string user_type = 7;
+    string created_at = 8;
+    string updated_at = 9;
+}
+
+message ReqLogin{
+    string email  = 1;
+    string password = 2;
+}
+
+message Tokens {
+    string access_token  = 1;
+    string refresh_token = 2;
+    int64 expires_in = 3;
+}
+
+message ReqRefresh{
+    string refresh_token = 1;
+}
