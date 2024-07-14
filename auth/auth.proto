@@ -10,25 +10,27 @@ service Auth {
     rpc Logout(Token) returns (Void);
     rpc RefreshToken(Token) returns (Tokens);
     rpc ResetPassword(ReqResetPassword) returns (Status);
-
+    rpc UpdatePassword(ReqUpdatePassword) returns (Status);
 }
 
 message ReqCreateUser{
     string username  = 1;
     string email = 2;
-    string password = 3;
-    string full_name = 4;
-    string user_type = 5;
+    string phone_number = 3;
+    string password = 4;
+    string full_name = 5;
+    string user_type = 6;
 }
 
 message User {
     string id = 1;
     string username  = 2;
     string email = 3;
-    string full_name = 4;
-    string user_type = 5;
-    string created_at = 6;
-    string updated_at = 7;
+    string phone_number = 4;
+    string full_name = 5;
+    string user_type = 6;
+    string created_at = 7;
+    string updated_at = 8;
 }
 
 message ReqLogin{
@@ -50,8 +52,9 @@ message UserClaims {
     string id = 1;
     string username  = 2;
     string email = 3;
-    string full_name = 4;
-    string user_type = 5;
+    string phone_number = 4;
+    string full_name = 5;
+    string user_type = 6;
 }
 
 message Void{
@@ -64,4 +67,8 @@ message ReqResetPassword{
 
 message Status{
     string message = 1; 
+}
+message ReqUpdatePassword {
+    string email = 1;
+    string password = 2;
 }
