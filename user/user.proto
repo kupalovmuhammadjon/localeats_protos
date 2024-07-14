@@ -8,6 +8,7 @@ service UserService{
     rpc GetProfile(Id) returns (User);
     rpc UpdateProfile(ReqUpdateUser) returns (User);
     rpc DeleteUser(Id) returns (Status);
+    rpc ValidateUserId(Id) returns (Void);
 }
 
 message Id{
@@ -45,4 +46,8 @@ message ReqUpdateUser{
 
 message Status{
     string message = 1; 
+}
+
+message Void{
+    
 }
