@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option go_package = "genproto/review";
+
+package review;
+
+
+service Review{
+    rpc CreateReview(ReqCreateReview) returns (ReviewInfo);
+    rpc GetReviewsByKitchenId(Filter) returns (Reviews);
+    rpc DeleteComment(Id) returns (Void);
+    rpc ValidateReviewId(Id) returns (Void);
+
+}
+
+message ReqCreateReview{
+    string order_id = 1;
+    string user_id = 2;
+    string kitchen_id = 3;
+    int32 rating  = 4;
+    string comment = 5;
+}
+
+message ReviewInfo{
+    string id = 1;
+    string order_id = 2;
+    string user_id = 3;
+    string kitchen_id = 4;
+    int32 rating  = 5;
+    string comment = 6;
+    string created_at = 7;
+    string updated_at = 8;
+}
+
+message ReviewShortInfo{
+    string id = 1;
+    string order_id = 2;
+    string user_id = 3;
+    string username = 4;
+    int32 rating  = 5;
+    string comment = 6;
+    string created_at = 7;
+    string updated_at = 8;
+}
+
+message Reviews{
+    repeated ReviewShortInfo reviews = 1;
+    int64 total = 2;
+    float average_rating = 3;
+    int32 page = 4;
+    int32 limit = 5;
+}
+
+message Id{
+    string id = 1;
+}
+
+message Void {
+}
+
+message Filter{
+    string id = 1;
+    int32 page = 2;
+    int32 limit = 3;
+}

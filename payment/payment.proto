@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "genproto/payment";
+
+package payment;
+
+service Payment{
+    rpc CreatePayment(ReqCreatePayment) returns (PaymentInfo);
+    rpc ValidatePaymentId(Id) returns (Void);
+}
+
+message ReqCreatePayment{
+    string order_id = 1;
+    string payment_method = 2; 
+    string card_number = 3;
+    string expiry_date = 4;
+    string cvv = 5;
+}
+
+message PaymentInfo{
+    string id = 1;
+    string order_id = 2;
+    float amount = 3;
+    string status = 4; 
+    string transaction_id = 5; 
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+message Id{
+    string id = 1;
+}
+
+message Void{
+}

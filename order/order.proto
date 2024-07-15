@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+option go_package = "genproto/order";
+
+package order;
+
+service Order {
+    rpc CreateOrder(ReqCreateOrder) returns (OrderInfo);
+    rpc UpdateOrderStatus(Status) returns (Void);
+    rpc GetOrderById(Id) returns (OrderInfo);
+    rpc GetOrdersForUser(Id) returns (Orders);
+    rpc GetOrdersForChef(Id) returns (Orders);
+    rpc DeleteOrder(Id) returns (Void);
+    rpc ValidateOrderId(Id) returns (Void);
+
+    rpc RecommendDishes(Filter) returns (Recommendations);
+    rpc GetKitchenStatistics(DateFilter) returns (KitchenStatistics);
+    rpc GetUserStatistics(DateFilter) returns (UserStatistics);
+    rpc ManageWorkingHours(Id) returns (WorkingHours);
+}
+
+message Item {
+    string dish_id = 1;
+    int32 quantity = 2;
+}
+
+message ReqCreateOrder{
+    string kitchen_id = 1;
+    string user_id = 2;
+    repeated Item items = 3;
+    string delivery_address = 4;
+    string delivery_time = 5;
+}
+
+message OrderInfo{
+    string id = 1;
+    string user_id = 2;
+    string kitchen_id = 3;
+    repeated Item items = 4;
+    float total_amount = 5;
+    string status = 6;
+    string delivery_address = 7;
+    string delivery_time = 8;
+    string created_at = 9;
+    string updated_at = 10;
+}
+
+message Orders{
+    repeated OrderShortInfo orders = 1;
+    int64 total = 2;
+    int64 page = 3;
+    int64 limit = 4;
+}
+
+message OrderShortInfo{
+    string id = 1;
+    string user_id = 2;
+    string username = 3;
+    string status = 4;
+    string total_amount = 5;
+    string delivery_time = 6;
+}
+
+message Id{
+    string id = 1;
+}
+
+message Void{
+}
+
+message Status{
+    string status = 1;
+}
+
+message Filter {
+    string id = 1;
+    int32 page = 2;
+    int32 limit = 3;
+}
+
+message DateFilter {
+    string id = 1;
+    string start_date = 2;
+    string end_date = 3;
+}
+
+
+message Dish{
+    string id = 1;
+    string name = 2;
+    string kitchen_name = 3;
+    float price = 4;
+    float rating = 5;
+}
+
+message Recommendations{
+    repeated Dish dishes = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message DishStats{
+    string id = 1;
+    string name = 2;
+    int32 orders_count = 3;
+    float revenue = 4;
+}
+
+message HourStats{
+    string hour = 1;
+    int32 orders_count = 2;
+    float revenue = 3;
+}
+
+message KitchenStatistics{
+    int64 total_orders = 1;
+    double total_revenue = 2;
+    float average_rating = 3;
+    repeated DishStats top_dishes = 4;
+    repeated HourStats busiest_hours = 5;
+}
+
+message CuisineStats {
+    string cuisine_type = 1;
+    int64 orders_count =  2;
+    double total_spent = 3;
+}
+
+message KitchenStats {
+    string id = 1;
+    string name = 2;
+    int64 orders_count =  3;
+    double total_spent = 4;
+}
+
+message UserStatistics{
+    int64 total_orders = 1;
+    double total_spent = 2;
+    float average_rating = 3;
+    repeated CuisineStats favorite_cuisines = 4;
+    repeated KitchenStats favorite_kitchens = 5;
+}
+
+message WorkingHoursOfDay{
+    string open = 1;
+    string close = 2;
+    bool is_work_day = 3;
+}
+
+message WorkingHours{
+    string kitchen_id = 1;
+    WorkingHoursOfDay monday = 2;
+    WorkingHoursOfDay tuesday = 3;
+    WorkingHoursOfDay wednesday = 4;
+    WorkingHoursOfDay thursday = 5;
+    WorkingHoursOfDay friday = 6;
+    WorkingHoursOfDay saturday = 7;
+    WorkingHoursOfDay sunday = 8;
+}
+
+message WorkingHoursRes{
+    string kitchen_id = 1;
+    WorkingHoursOfDay monday = 2;
+    WorkingHoursOfDay tuesday = 3;
+    WorkingHoursOfDay wednesday = 4;
+    WorkingHoursOfDay thursday = 5;
+    WorkingHoursOfDay friday = 6;
+    WorkingHoursOfDay saturday = 7;
+    WorkingHoursOfDay sunday = 8;
+    string created_at = 9;
+    string updated_at = 10;
+}

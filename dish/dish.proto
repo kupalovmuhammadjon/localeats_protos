@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option go_package = "genproto/dish";
+
+package dish;    
+
+service Dish{
+    rpc CreateDish(ReqCreateDish) returns (DishInfo);
+    rpc UpdateDish(ReqUpdateDish) returns (DishInfo);
+    rpc GetDishes(Pagination) returns (Dishes);
+    rpc GetDishById(Id) returns (DishInfo);
+    rpc DeleteDish(Id) returns (Void);
+    rpc ValidateDishId(Id) returns (Void);
+    rpc UpdateNutritionInfo(Id) returns (DishInfo);
+}
+
+message ReqCreateDish{
+    string kitchen_id = 1;
+    string name = 2;
+    float price = 3;
+    float category = 4;
+    repeated string ingredients = 5;
+    string description = 6;
+    bool available = 7;
+    repeated string allergens = 8;
+    string nutrition_info = 9;
+}
+
+message DishInfo{
+    string id = 1;
+    string kitchen_id = 2;
+    string name = 3;
+    float price = 4;
+    float category = 5;
+    repeated string ingredients = 6;
+    string description = 7;
+    bool available = 8;
+    repeated string allergens = 9;
+    string nutrition_info = 10;
+    string created_at = 11;
+    string updated_at = 12;
+}
+
+message DishShortInfo{
+    string id = 1;
+    string kitchen_id = 2;
+    string kitchen_name = 3;
+    float price = 4;
+    float category = 5;
+    bool available = 6;
+}
+
+message Dishes{
+    repeated DishShortInfo dishes = 1;
+    int64 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message ReqUpdateDish{
+    string id = 1;
+    string name = 2;
+    float price = 3;
+    float category = 4;
+    repeated string ingredients = 5;
+    string description = 6;
+    bool available = 7;
+}
+
+message Id {
+    string id = 1;
+}
+
+message Void {
+}
+
+message Pagination{
+    int32 page = 1;
+    int32 limit = 2;
+}
+
+message NutritionInfo{
+    repeated string allergens = 1;
+    int32 calories = 2;
+    int32 protein = 3;
+    int32 carbohydrates = 4;
+    int32 fat = 5;
+    repeated string dietary_info = 6;
+}
