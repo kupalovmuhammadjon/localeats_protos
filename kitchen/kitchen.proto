@@ -10,6 +10,7 @@ service Kitchen {
     rpc GetKitchenById(Id) returns (KitchenInfo);
     rpc GetKitchens(Pagination) returns (Kitchens);
     rpc SearchKitchens(Search) returns (Kitchens);
+    rpc DeleteKitchen(Id) returns (Void);
 
 }
 
@@ -81,4 +82,8 @@ message Search {
     string address = 4;    
     int32 page = 5;
     int32 limit = 6;
+}
+
+message Void{
+    
 }
