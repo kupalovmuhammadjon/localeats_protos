@@ -27,17 +27,18 @@ message ReqCreateDish{
 message DishInfo{
     string id = 1;
     string kitchen_id = 2;
-    string name = 3;
-    float price = 4;
-    string category = 5;
-    repeated string ingredients = 6;
-    string description = 7;
-    bool available = 8;
-    repeated string allergens = 9;
-    string nutrition_info = 10;
-    repeated string dietary_info = 11;
-    string created_at = 12;
-    string updated_at = 13;
+    string kitchen_name = 3;
+    string name = 4;
+    float price = 5;
+    string category = 6;
+    repeated string ingredients = 7;
+    string description = 8;
+    bool available = 9;
+    repeated string allergens = 10;
+    string nutrition_info = 11;
+    repeated string dietary_info = 12;
+    string created_at = 13;
+    string updated_at = 14;
 }
 
 message DishShortInfo{
