@@ -81,10 +81,11 @@ message Pagination{
 }
 
 message NutritionInfo{
-    repeated string allergens = 1;
-    int32 calories = 2;
-    int32 protein = 3;
-    int32 carbohydrates = 4;
-    int32 fat = 5;
-    repeated string dietary_info = 6;
+    string id = 1;
+    repeated string allergens = 2;
+    int32 calories = 3;
+    int32 protein = 4;
+    int32 carbohydrates = 5;
+    int32 fat = 6;
+    repeated string dietary_info = 7;
 }
