@@ -8,8 +8,8 @@ service Order {
     rpc CreateOrder(ReqCreateOrder) returns (OrderInfo);
     rpc UpdateOrderStatus(Status) returns (StatusRes);
     rpc GetOrderById(Id) returns (OrderInfo);
-    rpc GetOrdersForUser(Id) returns (Orders);
-    rpc GetOrdersForChef(Id) returns (Orders);
+    rpc GetOrdersForUser(Filter) returns (Orders);
+    rpc GetOrdersForChef(Filter) returns (Orders);
     rpc DeleteOrder(Id) returns (Void);
     rpc ValidateOrderId(Id) returns (Void);
 
