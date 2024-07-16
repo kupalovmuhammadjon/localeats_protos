@@ -11,19 +11,17 @@ service Dish{
     rpc GetDishById(Id) returns (DishInfo);
     rpc DeleteDish(Id) returns (Void);
     rpc ValidateDishId(Id) returns (Void);
-    rpc UpdateNutritionInfo(Id) returns (DishInfo);
+    rpc UpdateNutritionInfo(NutritionInfo) returns (DishInfo);
 }
 
 message ReqCreateDish{
     string kitchen_id = 1;
     string name = 2;
     float price = 3;
-    float category = 4;
+    string category = 4;
     repeated string ingredients = 5;
     string description = 6;
     bool available = 7;
-    repeated string allergens = 8;
-    string nutrition_info = 9;
 }
 
 message DishInfo{
@@ -31,14 +29,15 @@ message DishInfo{
     string kitchen_id = 2;
     string name = 3;
     float price = 4;
-    float category = 5;
+    string category = 5;
     repeated string ingredients = 6;
     string description = 7;
     bool available = 8;
     repeated string allergens = 9;
     string nutrition_info = 10;
-    string created_at = 11;
-    string updated_at = 12;
+    repeated string dietary_info = 11;
+    string created_at = 12;
+    string updated_at = 13;
 }
 
 message DishShortInfo{
@@ -46,7 +45,7 @@ message DishShortInfo{
     string kitchen_id = 2;
     string kitchen_name = 3;
     float price = 4;
-    float category = 5;
+    string category = 5;
     bool available = 6;
 }
 
@@ -61,7 +60,7 @@ message ReqUpdateDish{
     string id = 1;
     string name = 2;
     float price = 3;
-    float category = 4;
+    string category = 4;
     repeated string ingredients = 5;
     string description = 6;
     bool available = 7;
