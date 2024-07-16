@@ -20,7 +20,7 @@ message ReqCreatePayment{
 message PaymentInfo{
     string id = 1;
     string order_id = 2;
-    float amount = 3;
+    double amount = 3;
     string status = 4; 
     string transaction_id = 5; 
     string created_at = 6;
