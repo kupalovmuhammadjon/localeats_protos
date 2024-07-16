@@ -6,7 +6,7 @@ package order;
 
 service Order {
     rpc CreateOrder(ReqCreateOrder) returns (OrderInfo);
-    rpc UpdateOrderStatus(Status) returns (Void);
+    rpc UpdateOrderStatus(Status) returns (StatusRes);
     rpc GetOrderById(Id) returns (OrderInfo);
     rpc GetOrdersForUser(Id) returns (Orders);
     rpc GetOrdersForChef(Id) returns (Orders);
@@ -37,7 +37,7 @@ message OrderInfo{
     string user_id = 2;
     string kitchen_id = 3;
     repeated Item items = 4;
-    float total_amount = 5;
+    double total_amount = 5;
     string status = 6;
     string delivery_address = 7;
     string delivery_time = 8;
@@ -48,8 +48,8 @@ message OrderInfo{
 message Orders{
     repeated OrderShortInfo orders = 1;
     int64 total = 2;
-    int64 page = 3;
-    int64 limit = 4;
+    int32 page = 3;
+    int32 limit = 4;
 }
 
 message OrderShortInfo{
@@ -57,7 +57,7 @@ message OrderShortInfo{
     string user_id = 2;
     string username = 3;
     string status = 4;
-    string total_amount = 5;
+    double total_amount = 5;
     string delivery_time = 6;
 }
 
@@ -69,7 +69,14 @@ message Void{
 }
 
 message Status{
-    string status = 1;
+    string id = 1;
+    string status = 2;
+}
+
+message StatusRes{
+    string id = 1;
+    string status = 2;
+    string updated_at = 3;
 }
 
 message Filter {
