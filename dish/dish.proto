@@ -12,6 +12,7 @@ service Dish{
     rpc DeleteDish(Id) returns (Void);
     rpc ValidateDishId(Id) returns (Void);
     rpc UpdateNutritionInfo(NutritionInfo) returns (DishInfo);
+    rpc RecommendDishes(Filter) returns (Recommendations);
 }
 
 message ReqCreateDish{
@@ -88,4 +89,17 @@ message NutritionInfo{
     int32 carbohydrates = 5;
     int32 fat = 6;
     repeated string dietary_info = 7;
+}
+
+message Recommendations{
+    repeated DishShortInfo dishes = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message Filter {
+    string id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }

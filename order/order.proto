@@ -13,7 +13,6 @@ service Order {
     rpc DeleteOrder(Id) returns (Void);
     rpc ValidateOrderId(Id) returns (Void);
 
-    rpc RecommendDishes(Filter) returns (Recommendations);
     rpc GetKitchenStatistics(DateFilter) returns (KitchenStatistics);
     rpc GetUserStatistics(DateFilter) returns (UserStatistics);
     rpc ManageWorkingHours(Id) returns (WorkingHours);
@@ -89,22 +88,6 @@ message DateFilter {
     string id = 1;
     string start_date = 2;
     string end_date = 3;
-}
-
-
-message Dish{
-    string id = 1;
-    string name = 2;
-    string kitchen_name = 3;
-    float price = 4;
-    float rating = 5;
-}
-
-message Recommendations{
-    repeated Dish dishes = 1;
-    int32 total = 2;
-    int32 page = 3;
-    int32 limit = 4;
 }
 
 message DishStats{
