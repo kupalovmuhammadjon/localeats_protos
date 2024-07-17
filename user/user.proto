@@ -9,6 +9,8 @@ service UserService{
     rpc UpdateProfile(ReqUpdateUser) returns (User);
     rpc DeleteUser(Id) returns (Status);
     rpc ValidateUserId(Id) returns (Void);
+    rpc UpdateUserPreferences(Preferences) returns (PreferencesRes);
+    rpc GetUserPreference(Id) returns (PreferencesRes);
 }
 
 message Id{
@@ -50,4 +52,20 @@ message Status{
 
 message Void{
     
+}
+
+message Preferences{
+    string user_id = 1;
+    string cuisine_type = 2;
+    repeated string dietary_preferences = 3;
+    repeated string favorite_kitchen_ids = 4;
+}
+
+message PreferencesRes{
+    string user_id = 1;
+    string cuisine_type = 2;
+    repeated string dietary_preferences = 3;
+    repeated string favorite_kitchen_ids = 4;
+    string created_at = 5;
+    string updated_at = 6;
 }
